@@ -1,0 +1,109 @@
+
+<html lang="pt-br">
+<head>
+<title>Teste</title>
+<meta charset='utf-8'>
+<script src='jquery-3.5.0.min.js'></script>
+<link href="css/bootstrap.min.css" rel='stylesheet'/>  
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <style>
+         #box{
+             width: 150px;
+             height: 150px;
+             background-color: crimson;
+             color:white;
+         }
+         #box2{
+             width: 50px;
+             height: 50px;
+             background-color: azure;
+             margin:20px 10px;
+         }
+         #painel{
+             margin-top: 2em;
+         }
+    
+    </style>
+    
+    </head>
+    
+    <body class='conteiner'>
+
+           <div class="container">
+  <h2>Panel Heading</h2>
+        <div id='box'>
+           <!-- <div id='box2'></div> -->
+         </div><br>
+               <div></div> <p><input type='text' id='nome'></p> </div>
+  <div id='painel' class="panel panel-default">
+    <div class="panel-heading" id='painelAlerta'>Resultado
+      <button id='limpar'><span class="glyphicon glyphicon-erase"></span></button>
+      </div>
+    <div class="panel-body"  id="resultados"></div>
+  </div>
+</div> 
+    </body>
+</html>
+<script>
+$(document).ready(function(){
+    $('#box')        
+    .click(function(e){
+        mensagem('Clique'+e.target.id);
+    })
+    
+    .dblclick(function(e){
+        mensagem('Duplo Clique'+e.target.id);
+    })
+    .mouseover(function(e){
+        mensagem('mouseover'+e.target.id);
+    })
+    .mouseout(function(e){
+        mensagem('mouseout'+e.target.id);
+    })
+    .mouseleave(function(e){
+        mensagem('mouseleave'+e.target.id);
+    })
+    
+    .contextmenu(function(e){
+        e.preventDefault();
+        mensagem('Botão Direito Clicado'+e.target.id);
+    })
+    
+    .mousemove(function(e){
+        //posicao da seta em relação a pagina
+        //$('#box').html('('+e.pageX+','+e.pageY+')');
+        var p= $(this).position();
+        $(this).html('('+
+                    parseInt(e.pageX-p.left)+','+
+                    parseInt(e.pageY-p.top)+')');
+                     
+        
+    })
+    
+    $('#nome').keypress(function(e){
+        mensagem('Tecla pressionada:'+String.fromCharCode(e.which));
+    })
+    
+    $('#nome').focus(function(e){
+        $(this).css('border','solid');
+    })
+    .blur(function(e){
+        $(this).css('border','');
+    })
+    
+    $('#nome').change(function(){
+        mensagem($(this).val());
+    });
+    
+    $('#limpar').click(function(){
+        $('#resultados').empty();
+    });
+    
+});
+    
+    
+    
+    function mensagem(str){
+        $('#resultados').append($('<p>'+str+'</p>'));
+    } 
+</script> 
